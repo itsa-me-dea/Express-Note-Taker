@@ -89,6 +89,44 @@ app.post('/api/notes', (req, res) => {
     }
   });
 
+//  request to delete note
+app.delete('/api/notes/:id', (req, res) => {
+    const noteId = req.params.id;
+    // Log that note was deleted
+    console.info(`Sucessfully deleted note id: ${noteId}`);
+  
+      // Obtain existing notes
+      fs.readFile('./db/db.json', 'utf8', (err, data) => {
+        if (err) {
+          console.error(err);
+        } else {
+          // Convert string into JSON object
+          const jsonData = JSON.parse(data);
+  
+          // Find the index of the item with the given ID
+          const itemIndex = jsonData.findIndex(item => item.id === noteId);
+          
+          if (itemIndex === -1) {
+            return res.status(404).json({ error: 'Note id not found' });
+          }
+          
+          // Remove the item from the array
+          jsonData.splice(itemIndex, 1);
+          
+          // Write the updated JSON data back to the file
+          fs.writeFile('./db/db.json', JSON.stringify(jsonData, null, 2), 'utf8', err => {
+            if (err) {
+                console.error('Error writing to file:', err);
+                return res.status(500).json({ error: 'Internal Server Error' });
+            }
+            
+            res.json({ message: 'Note deleted successfully' });
+          });
+  
+        };
+    });
+});
+
 // listen() method is responsible for listening for incoming connections on the specified port 
 app.listen(PORT, () =>
   console.log(`App listening on http://localhost:${PORT} 🚀`)
