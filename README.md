@@ -17,9 +17,9 @@ I learned how to utilize Express and (somewhat) Heroku.
 
 ## Installation
 
-The application webpage is: link.
+Heroku Deployed App: https://agile-spire-31422-c2116f810f76.herokuapp.com/notes.
 
-Or you can download or fork this package. From there, open the integrated terminal (this is for VSCode) and run the following: 1. 1. `npm i`, 2. `npm run start`. 
+Or you can download or fork this package. From there, open the integrated terminal (this is for VSCode) and run the following: 1. `npm i`, 2. `npm run start`. 
 
 ## Usage
 
